@@ -16,13 +16,31 @@ function playRound(playerSelection, computerSelection) {
   if ((computerSelection==="rock"&&playerSelection==="paper")
   ||(computerSelection==="paper"&&playerSelection==="scissors")
   ||(computerSelection==="scissors"&&playerSelection==="rock")){
-    return "you won"
+    if ((computerSelection==="rock"&&playerSelection==="paper")){
+      return "you won, paper covers rock";
+    }
+    if ((computerSelection==="paper"&&playerSelection==="scissors")){
+      return "you won,scissors cuts paper"
+    }
+    if((computerSelection==="scissors"&&playerSelection==="rock")){
+      return "you won,rock breaks scissors"
+    }
 
   }
   if ((playerSelection==="rock"&&computerSelection==="paper")
   ||(playerSelection==="paper"&&computerSelection==="scissors")
   ||(playerSelection==="scissors"&&computerSelection==="rock")){
-    return "you lose"
+    
+      if ((playerSelection==="rock"&&computerSelection==="paper")){
+        return "you lose, paper covers rock";
+      }
+      if ((playerSelection==="paper"&&computerSelection==="scissors")){
+        return "you lose,scissors cuts paper"
+      }
+      if((playerSelection==="scissors"&&computerSelection==="rock")){
+        return "you lose,rock breaks scissors"
+      }
+
   }  
 }
 console.log(playRound(playerSelection,computerSelection))
