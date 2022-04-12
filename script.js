@@ -1,3 +1,5 @@
+/* ROCK-PAPER-SCISSORS */
+//function for randomly select from (rock-paper-scissors)
 function computerPlay(){
 const choose = ["rock", "paper","scissors"];
 
@@ -6,7 +8,7 @@ return (choose[random]);
 }
 let playerScore=0;
 let computerScore=0;
-
+//writing a function to play one round of rock-paper-scissors.
 function playRound(playerSelection, computerSelection) {
   if (playerSelection===computerSelection){
     return "it's tie"
@@ -41,6 +43,7 @@ function playRound(playerSelection, computerSelection) {
 
   }  
 }
+//playing five rounds of rock paper scissors
 function game(){
   for (let i=0;i<5;i++){ 
     let playerSelection = prompt("Enter rock,paper or scissors:");
