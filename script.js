@@ -1,29 +1,42 @@
-/* ROCK-PAPER-SCISSORS */
-//function for randomly select from (rock-paper-scissors)
-function computerPlay(){
-const choose = ["rock", "paper","scissors"];
 
-const random = Math.floor(Math.random() * choose.length);;
-return (choose[random]);
+const computerChoiceDisplay=document.getElementById("computer-choice")
+const playerChoiceDisplay=document.getElementById("player-choice")
+const resultDisplay=document.getElementById("result")
+const possibleChoices=document.querySelectorAll("button")
+let playerSelection;
+let computerSelection;
+
+possibleChoices.forEach(possibleChoice=>possibleChoice.addEventListener('click', (e) => {
+   playerSelection = e.target.id;
+   playerChoiceDisplay.innerText=playerSelection;
+   generateComputerChoice();
+   playRound();
+   game();
+   winner();
+}))
+
+function generateComputerChoice(){
+  const choose=["rock","paper","scissors"];
+  const randomNumber = Math.floor(Math.random()*choose.length);
+  computerSelection=choose[randomNumber];
+  computerChoiceDisplay.innerText=computerSelection;
 }
-let playerScore=0;
-let computerScore=0;
-//writing a function to play one round of rock-paper-scissors.
-function playRound(playerSelection, computerSelection) {
+
+function playRound() {
   if (playerSelection===computerSelection){
-    return "it's tie"
+    result= "it's tie"
   }
   if ((computerSelection==="rock"&&playerSelection==="paper")
   ||(computerSelection==="paper"&&playerSelection==="scissors")
   ||(computerSelection==="scissors"&&playerSelection==="rock")){
     if ((computerSelection==="rock"&&playerSelection==="paper")){
-      return "you win, paper covers rock";
+      result= "you win, paper covers rock";
     }
     if ((computerSelection==="paper"&&playerSelection==="scissors")){
-      return "you win,scissors cuts paper"
+      result="you win,scissors cuts paper"
     }
     if((computerSelection==="scissors"&&playerSelection==="rock")){
-      return "you win,rock breaks scissors"
+      result= "you win,rock breaks scissors"
     }
 
   }
@@ -32,40 +45,46 @@ function playRound(playerSelection, computerSelection) {
   ||(playerSelection==="scissors"&&computerSelection==="rock")){
     
       if ((playerSelection==="rock"&&computerSelection==="paper")){
-        return "you lose, paper covers rock";
+        result= "you lose, paper covers rock";
       }
       if ((playerSelection==="paper"&&computerSelection==="scissors")){
-        return "you lose,scissors cuts paper"
+        result="you lose,scissors cuts paper"
       }
       if((playerSelection==="scissors"&&computerSelection==="rock")){
-        return "you lose,rock breaks scissors"
+        result="you lose,rock breaks scissors"
       }
-
-  }  
+  } 
+  resultDisplay.innerText= result;
+  return result
 }
-//playing five rounds of rock paper scissors
-function game(){
-  for (let i=0;i<5;i++){ 
-    let playerSelection = prompt("Enter rock,paper or scissors:");
-    playerSelection=playerSelection.toLowerCase();
-    let computerSelection = computerPlay();
-    console.log(computerSelection);
-    let roundResult = playRound(playerSelection,computerSelection);
-    console.log(roundResult);
-    if (roundResult.search('you win') > -1) {
-      playerScore++;
-    } else if (roundResult.search('you lose') > -1) {
-      computerScore++;
-    }
-  }
-    if (playerScore >computerScore) {
-      return 'Game Over. You Win!';
-    } else if (playerScore<computerScore) {
-      return 'Game Over. You Lose!';
-    } else{
-      return "Game Over. It's draw";
-      
-    }
-  }
 
-console.log(game())
+const computerScoreDisplay=document.getElementById("computer-score")
+const playerScoreDisplay=document.getElementById("player-score")
+const gameResultDisplay=document.getElementById("game-result")
+
+
+let playerScore=0;
+let computerScore=0;
+function game(){
+  
+  let roundResult = playRound();
+  if (roundResult.search('you win,') > -1) {
+    playerScore++;
+    
+  } else if (roundResult.search('you lose,') > -1) {
+    computerScore++;
+    
+  }
+  playerScoreDisplay.innerText=playerScore;
+  computerScoreDisplay.innerText=computerScore;
+}
+function winner(){
+  if (playerScore >= 5 && computerScore < 5) {
+    output = 'Game Over. You Win!';
+  } else if (playerScore < 5 && computerScore >= 5) {
+    output = 'Game Over. You Lose!';
+  }
+ gameResultDisplay.innerText=output;
+}
+
+
