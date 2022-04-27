@@ -5,7 +5,7 @@ const resultDisplay=document.getElementById("result")
 const possibleChoices=document.querySelectorAll("button")
 let playerSelection;
 let computerSelection;
-
+//adding eventListeners
 possibleChoices.forEach(possibleChoice=>possibleChoice.addEventListener('click', (e) => {
    playerSelection = e.target.id;
    playerChoiceDisplay.innerText=playerSelection;
@@ -14,14 +14,14 @@ possibleChoices.forEach(possibleChoice=>possibleChoice.addEventListener('click',
    game();
    winner();
 }))
-
+//randomly selecting rock,paper,scissors
 function generateComputerChoice(){
   const choose=["rock","paper","scissors"];
   const randomNumber = Math.floor(Math.random()*choose.length);
   computerSelection=choose[randomNumber];
   computerChoiceDisplay.innerText=computerSelection;
 }
-
+//playing one round of rock,paper,scissors
 function playRound() {
   if (playerSelection===computerSelection){
     result= "it's tie"
@@ -62,7 +62,7 @@ const computerScoreDisplay=document.getElementById("computer-score")
 const playerScoreDisplay=document.getElementById("player-score")
 const gameResultDisplay=document.getElementById("game-result")
 
-
+//keeping track of the score and whoever wins the first five rounds wins the game
 let playerScore=0;
 let computerScore=0;
 function game(){
